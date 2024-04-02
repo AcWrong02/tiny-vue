@@ -238,6 +238,7 @@
     "@opentiny/vue-slider-button-group": "workspace:~",
     "@opentiny/vue-split": "workspace:~",
     "@opentiny/vue-standard-list-item": "workspace:~",
+    "@opentiny/vue-statistic": "workspace:~",
     "@opentiny/vue-steps": "workspace:~",
     "@opentiny/vue-svg-icon": "workspace:~",
     "@opentiny/vue-switch": "workspace:~",
