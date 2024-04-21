@@ -49,7 +49,7 @@ export const inputProps = {
   label: String,
   height: Number,
   resize: String,
-  tabindex: { type: String, default: '1' },
+  tabindex: { type: String, default: '0' },
   disabled: Boolean,
   readonly: Boolean,
   hoverExpand: Boolean,
