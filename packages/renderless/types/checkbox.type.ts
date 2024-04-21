@@ -51,6 +51,7 @@ export interface ICheckboxState {
   model: ICheckboxModalValue | ICheckboxModalValue[]
   showText: boolean
   isShowText: boolean
+  shaper: string
   tooltipVisible: boolean
   displayedValue: string
 }

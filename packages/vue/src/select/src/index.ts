@@ -121,7 +121,7 @@ export default defineComponent({
     },
     tabindex: {
       type: String,
-      default: '1'
+      default: '0'
     },
     valueField: {
       type: String,
