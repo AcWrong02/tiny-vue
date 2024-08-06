@@ -387,10 +387,10 @@ export const Cell = {
   renderIndexCell(h, params) {
     const { $table, column, row, seq, $seq, level } = params
     // startIndex：序号列的起始值
-    const { startIndex, treeConfig, scrollYLoad } = $table
+    const { startIndex, treeConfig, scrollYLoad, treeOrdered } = $table
     const { indexMethod, slots } = column
-    const { ordered, temporaryIndex = '_$index_' } = treeConfig || {}
-    const isTreeOrderedFalse = treeConfig && !ordered
+    const { temporaryIndex = '_$index_' } = treeConfig || {}
+    const isTreeOrderedFalse = treeConfig && !treeOrdered
     let indexValue = startIndex + seq
     // tree-config为false的情况下，序号为1.1这种形式
     if (isTreeOrderedFalse && level) {
@@ -845,7 +845,8 @@ export const Cell = {
     let { formatText, own, slots } = column
     let editor = own.editor
     let compConf = Renderer.get(editor.component)
-    let showEdit = editor.type === 'visible' || isEdit
+    // 表格没有配置editConfig时，type === 'visible'不展示编辑态
+    let showEdit = ($table.editConfig && editor.type === 'visible') || isEdit
 
     if (showEdit && slots && slots.edit) {
       return slots.edit(params, h)

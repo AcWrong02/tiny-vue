@@ -184,6 +184,9 @@ export default {
       },
       timezone: '选择时区',
       year: '年',
+      hour: '时',
+      minute: '分',
+      second: '秒',
       to: '至',
       yearMonth: '{year}年{month}月',
       yearMonthDay: '{year}年{month}月{day}日'
@@ -291,6 +294,7 @@ export default {
       onlySupport: '仅支持{type}格式文件',
       fileNotLessThan: '单个文件不能小于',
       fileNotMoreThan: '单个文件不能超过',
+      fileSizeRange: '单个文件大小需在{moreThan}~{lessThan}之间',
       notSupport: '格式（.{format}）暂不支持',
       notSupportNoSuffix: '暂不支持无后缀文件',
       notSupportSpecialCharacters: '文件名包含特殊字符，请重命名后上传',
@@ -439,6 +443,7 @@ export default {
         switchedit: '编辑',
         switchdel: '删除',
         switchconfirm: '确定',
+        switchdelconfirm: '删除确认',
         switchonlytemp: '保存模板',
         switchtempapply: '保存并使用模板',
         switchtempoverwrite: '覆盖并使用模板',
@@ -663,6 +668,11 @@ export default {
       colorPicker: '背景颜色',
       placeholder: '在此处插入文本...',
       maxLength: '文本长度超过限制，支持的最大长度是 '
+    },
+    fluentEditor: {
+      undo: '撤销',
+      redo: '重做',
+      lineheight: '行高'
     },
     steps: {
       done: '已完成',

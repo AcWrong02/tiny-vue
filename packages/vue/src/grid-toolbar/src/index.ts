@@ -109,7 +109,8 @@ function renderCustomWrapper({ _vm, settingStore, settingsBtnOns, tableFullColum
             showModal: (modalVisible) => (settingStore.customVisible = modalVisible),
             saveSettings: _vm.handleSaveSettings,
             resetSettings: (settings) => _vm.$emit('reset-setting', settings),
-            cancelSettings: () => _vm.$emit('cancel-setting')
+            cancelSettings: () => _vm.$emit('cancel-setting'),
+            deleteTemplate: (template) => _vm.$emit('delete-template', template)
           },
           props: {
             customMode: _vm.customMode,
@@ -129,9 +130,9 @@ function renderCustomWrapper({ _vm, settingStore, settingsBtnOns, tableFullColum
             resetMethod: _vm.resetMethod,
             alwaysShowColumns: setting.alwaysShowColumns,
             columnsGroup: setting.columnsGroup,
-            hideSortColumn: setting.hideSortColumn,
             showHideAll: setting.showHideAll,
-            fixedSorting: setting.fixedSorting
+            fixedSorting: setting.fixedSorting,
+            setting
           },
           ref: 'custom'
         })
@@ -409,6 +410,18 @@ export default defineComponent({
     return h('div', propsArg, childrenArg)
   },
   methods: {
+    updateTemplateList() {
+      const custom = this.$refs.custom
+
+      if (custom && custom.$refs.switch) {
+        custom.$refs.switch.initStorage(false)
+      }
+    },
+    updateSelectedTemplate(val) {
+      const custom = this.$refs.custom
+
+      custom && custom.updateSelectedTemplate(val)
+    },
     settingBtnClick() {
       return this.setting && this.setting.customSetting
         ? this.setting.settingBtnClickFn()
@@ -648,8 +661,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/valid-next-tick
       return this.$nextTick(() => this.$refs.custom && this.$refs.custom.saveSettings())
     },
-    applySettings({ columns, pageSize }) {
-      const sort = this.setting && !!this.setting.sortable
+    applySettings({ columns, pageSize, updatedSorting }) {
+      const sort = (this.setting && !!this.setting.sortable) || updatedSorting
 
       if (this.$grid) {
         if (columns && columns.length) {
@@ -668,7 +681,7 @@ export default defineComponent({
         }
       }
     },
-    handleSaveSettings(settingConfigs) {
+    handleSaveSettings(settingConfigs, visible, updatedSorting) {
       let { settingStore, setting, settingOpts } = this
       let customRef = this.$refs.custom
 
@@ -676,7 +689,7 @@ export default defineComponent({
 
       const { columns, pageSize, sortType } = settingConfigs
 
-      this.applySettings({ columns, pageSize })
+      this.applySettings({ columns, pageSize, updatedSorting })
 
       // 如果开启本地缓存则保存数据到 localstorage
       if (setting && settingOpts.storage === 'local') {

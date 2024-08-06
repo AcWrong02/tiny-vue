@@ -145,7 +145,7 @@ export const inputProps = {
   },
   showEmptyValue: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   textAlign: {
     type: String,
@@ -153,6 +153,10 @@ export const inputProps = {
   },
   width: {
     type: [String, Number] as PropType<string | number | null>
+  },
+  showTooltip: {
+    type: Boolean,
+    default: true
   }
 }
 
